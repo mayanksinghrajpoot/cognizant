@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Alex Johnson",
+    "email": "alex.johnson@example.com",
+    "role": "Admin",
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "role": "User",
+    "isActive": false
+  },
+  {
+    "id": 3,
+    "name": "Michael Brown",
+    "email": "michael.b@example.com",
+    "role": "Moderator",
+    "isActive": true
+  }
+]
