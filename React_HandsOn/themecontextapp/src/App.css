@@ -1,0 +1,16 @@
+.btn-light {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-dark {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #222;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
