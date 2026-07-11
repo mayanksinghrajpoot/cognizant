@@ -1,0 +1,41 @@
+.notification-widget {
+  border: 1px dashed #ffa726;
+  background-color: #fffde7;
+  padding: 12px;
+  border-radius: 6px;
+  max-width: 400px;
+  margin-top: 16px;
+}
+
+.notification-widget h4 {
+  margin: 0 0 8px 0;
+  color: #e65100;
+}
+
+.notification-widget ul {
+  padding-left: 20px;
+  margin: 0 0 12px 0;
+}
+
+.notification-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.notification-input-group input {
+  padding: 6px;
+  font-size: 0.9em;
+}
+
+.notification-input-group button {
+  padding: 6px 12px;
+  background-color: #ffa726;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.notification-input-group button:hover {
+  background-color: #fb8c00;
+}

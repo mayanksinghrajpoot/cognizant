@@ -1,0 +1,10 @@
+<div class="notification-widget">
+  <h4>Notification Logs (Scoped Instance)</h4>
+  <ul>
+    <li *ngFor="let note of notifications">{{ note }}</li>
+  </ul>
+  <div class="notification-input-group">
+    <input #msgInput type="text" placeholder="Type notification..." class="form-control">
+    <button (click)="sendNotification(msgInput.value); msgInput.value='';" class="btn btn-primary">Send</button>
+  </div>
+</div>

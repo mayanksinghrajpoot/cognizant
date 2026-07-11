@@ -1,1 +1,22 @@
-<p>student-profile works!</p>
+<h2>Student Profile</h2>
+<div class="profile-info">
+  <p><strong>Name:</strong> {{ studentName }}</p>
+  <p><strong>Email:</strong> {{ studentEmail }}</p>
+</div>
+
+<h3>Enrolled Courses</h3>
+<div *ngIf="enrolledCourses.length > 0; else noEnrolled">
+  <ul>
+    <li *ngFor="let course of enrolledCourses">
+      {{ course.name }} ({{ course.code }}) - {{ course.credits }} Credits
+    </li>
+  </ul>
+</div>
+
+<ng-template #noEnrolled>
+  <p>You are not enrolled in any courses yet.</p>
+</ng-template>
+
+<hr>
+<app-notification></app-notification>
+

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 import { CommonModule } from '@angular/common';
 import { Highlight } from '../../directives/highlight.directive';
 import { CreditLabelPipe } from '../../pipes/credit-label.pipe';
+import { EnrollmentService } from '../../services/enrollment.service';
 
 @Component({
   selector: 'app-course-card',
@@ -15,6 +16,8 @@ export class CourseCard implements OnChanges {
 
   isExpanded = false;
 
+  constructor(private enrollmentService: EnrollmentService) {}
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['course']) {
       const prevValue = changes['course'].previousValue;
@@ -23,6 +26,10 @@ export class CourseCard implements OnChanges {
         previous: prevValue,
         current: currentValue
       });
+      // Sync initial enrollment status to EnrollmentService if the input course property is set to enrolled
+      if (this.course && this.course.enrolled) {
+        this.enrollmentService.enroll(this.course.id);
+      }
     }
   }
 
@@ -30,17 +37,27 @@ export class CourseCard implements OnChanges {
     this.isExpanded = !this.isExpanded;
   }
 
-  // cardClasses getter:
-  // Using getters keeps templates clean and readable. Instead of writing complex conditional objects
-  // directly in HTML (e.g. [ngClass]="{ 'card--enrolled': course.enrolled, ... }"), we encapsulate
-  // this logic inside the TypeScript class, making the template simpler and easier to maintain.
+  isEnrolled(): boolean {
+    return this.enrollmentService.isEnrolled(this.course.id);
+  }
+
+  onEnrollToggle(): void {
+    if (this.isEnrolled()) {
+      this.enrollmentService.unenroll(this.course.id);
+    } else {
+      this.enrollmentService.enroll(this.course.id);
+    }
+    this.enrollRequested.emit(this.course.id);
+  }
+
   get cardClasses(): { [key: string]: boolean | undefined } {
     return {
-      'card--enrolled': this.course.enrolled,
+      'card--enrolled': this.isEnrolled(),
       'card--full': this.course.credits >= 4,
       'expanded': this.isExpanded
     };
   }
+
 
   getBorderColor(): string {
     switch (this.course.gradeStatus) {

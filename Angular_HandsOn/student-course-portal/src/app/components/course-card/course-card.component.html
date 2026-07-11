@@ -12,8 +12,8 @@
     </div>
 
     <div class="course-card-actions">
-      <button (click)="enrollRequested.emit(course.id)">
-        {{ course.enrolled ? 'Unenroll' : 'Enroll' }}
+      <button (click)="onEnrollToggle()">
+        {{ isEnrolled() ? 'Unenroll' : 'Enroll' }}
       </button>
       <button (click)="toggleDetails()">
         {{ isExpanded ? 'Hide Details' : 'Show Details' }}

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CourseService } from '../../services/course.service';
+import { EnrollmentService } from '../../services/enrollment.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,21 @@ export class Home implements OnInit, OnDestroy {
   isPortalActive = true;
   message = '';
   searchTerm = '';
+
+  constructor(
+    private courseService: CourseService,
+    private enrollmentService: EnrollmentService
+  ) {}
+
+  get coursesCount(): number {
+    return this.courseService.getCourses().length;
+  }
+
+  get enrolledCount(): number {
+    return this.enrollmentService.getEnrolledCourses().length;
+  }
+
+
 
   // Difference between [property] and [(ngModel)]:
   // - [property] is one-way data binding: it flows from the component (TypeScript) to the DOM (HTML).

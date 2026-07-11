@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseCard } from '../../components/course-card/course-card.component';
+import { CourseService } from '../../services/course.service';
+import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-course-list',
@@ -11,30 +13,21 @@ import { CourseCard } from '../../components/course-card/course-card.component';
 export class CourseList implements OnInit {
   isLoading = true;
   selectedCourseId: number | null = null;
+  courses: Course[] = [];
 
-  courses = [
-    { id: 1, name: 'Introduction to Angular', code: 'CS101', credits: 3, gradeStatus: 'passed', enrolled: false },
-    { id: 2, name: 'Advanced TypeScript', code: 'CS102', credits: 4, gradeStatus: 'pending', enrolled: false },
-    { id: 3, name: 'Web Development Basics', code: 'CS103', credits: 2, gradeStatus: 'passed', enrolled: true },
-    { id: 4, name: 'Enterprise Architecture', code: 'CS104', credits: 4, gradeStatus: 'failed', enrolled: false },
-    { id: 5, name: 'Database Management Systems', code: 'CS105', credits: 3, gradeStatus: 'pending', enrolled: true }
-  ];
+  constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
+    this.courses = this.courseService.getCourses();
     setTimeout(() => {
       this.isLoading = false;
     }, 1500);
   }
 
+
   onEnroll(courseId: number): void {
-    console.log('Enrolling in course: ' + courseId);
+    console.log('Course list received enrollment request for ID: ' + courseId);
     this.selectedCourseId = courseId;
-    
-    // Toggle enrollment status for demonstration
-    const course = this.courses.find(c => c.id === courseId);
-    if (course) {
-      course.enrolled = !course.enrolled;
-    }
   }
 
   // trackByCourseId:
