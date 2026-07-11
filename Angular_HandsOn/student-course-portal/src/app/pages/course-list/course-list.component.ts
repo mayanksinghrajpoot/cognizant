@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseCard } from '../../components/course-card/course-card.component';
-import { CourseService } from '../../services/course.service';
 import { Course } from '../../models/course.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as CourseActions from '../../store/course.actions';
+import { selectAllCourses, selectCoursesLoading, selectCoursesError } from '../../store/course.selectors';
 
 @Component({
-  selector: 'app-course-list',
+  selector: 'app-app-course-list',
   imports: [CommonModule, CourseCard],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css',
@@ -18,14 +20,18 @@ export class CourseList implements OnInit {
   errorMessage = '';
 
   constructor(
-    private courseService: CourseService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) {}
 
 
   ngOnInit(): void {
-    this.courseService.getCourses().subscribe({
+    // Dispatch action to load courses via Effects
+    this.store.dispatch(CourseActions.loadCourses());
+
+    // Select course list from store
+    this.store.select(selectAllCourses).subscribe({
       next: (courses) => {
         const search = this.route.snapshot.queryParamMap.get('search');
         if (search) {
@@ -36,13 +42,18 @@ export class CourseList implements OnInit {
         } else {
           this.courses = courses;
         }
-      },
-      error: (err) => {
-        this.errorMessage = err.message || 'Failed to load courses.';
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
+      }
+    });
+
+    // Select loading status from store
+    this.store.select(selectCoursesLoading).subscribe((loading) => {
+      this.isLoading = loading;
+    });
+
+    // Select error message from store
+    this.store.select(selectCoursesError).subscribe((error) => {
+      if (error) {
+        this.errorMessage = error;
       }
     });
   }

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Highlight } from '../../directives/highlight.directive';
 import { CreditLabelPipe } from '../../pipes/credit-label.pipe';
 import { EnrollmentService } from '../../services/enrollment.service';
+import { Store } from '@ngrx/store';
+import { toggleEnrollment } from '../../store/course.actions';
 
 @Component({
   selector: 'app-course-card',
@@ -17,7 +19,10 @@ export class CourseCard implements OnChanges {
 
   isExpanded = false;
 
-  constructor(private enrollmentService: EnrollmentService) {}
+  constructor(
+    private enrollmentService: EnrollmentService,
+    private store: Store
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['course']) {
@@ -48,6 +53,7 @@ export class CourseCard implements OnChanges {
     } else {
       this.enrollmentService.enroll(this.course.id);
     }
+    this.store.dispatch(toggleEnrollment({ courseId: this.course.id }));
     this.enrollRequested.emit(this.course.id);
   }
 
