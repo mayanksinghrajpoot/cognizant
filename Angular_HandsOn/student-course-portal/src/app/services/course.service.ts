@@ -1,28 +1,65 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError, tap, retry } from 'rxjs/operators';
 import { Course } from '../models/course.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CourseService {
-  private courses: Course[] = [
-    { id: 1, name: 'Introduction to Angular', code: 'CS101', credits: 3, gradeStatus: 'passed', enrolled: false },
-    { id: 2, name: 'Advanced TypeScript', code: 'CS102', credits: 4, gradeStatus: 'pending', enrolled: false },
-    { id: 3, name: 'Web Development Basics', code: 'CS103', credits: 2, gradeStatus: 'passed', enrolled: true },
-    { id: 4, name: 'Enterprise Architecture', code: 'CS104', credits: 4, gradeStatus: 'failed', enrolled: false },
-    { id: 5, name: 'Database Management Systems', code: 'CS105', credits: 3, gradeStatus: 'pending', enrolled: true }
-  ];
+  private apiUrl = 'http://localhost:3000/courses';
 
-  getCourses(): Course[] {
-    return this.courses;
+  constructor(private http: HttpClient) {}
+
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.apiUrl).pipe(
+      retry(2),
+      map(courses => courses.filter(c => c.credits > 0)),
+      tap(courses => console.log('Courses loaded:', courses.length)),
+      catchError(err => {
+        console.error(err);
+        return throwError(() => new Error('Failed to load courses. Please try again.'));
+      })
+    );
   }
 
-  getCourseById(id: number): Course | undefined {
-    return this.courses.find(c => c.id === id);
+  getCourseById(id: number): Observable<Course> {
+    return this.http.get<Course>(`${this.apiUrl}/${id}`).pipe(
+      catchError(err => {
+        console.error(err);
+        return throwError(() => new Error(`Failed to load course details for ID ${id}.`));
+      })
+    );
   }
 
-  addCourse(course: Course): void {
-    this.courses.push(course);
+  createCourse(course: Omit<Course, 'id' | 'gradeStatus'>): Observable<Course> {
+    const newCourse = { ...course, gradeStatus: 'pending' as const, enrolled: false };
+    return this.http.post<Course>(this.apiUrl, newCourse).pipe(
+      catchError(err => {
+        console.error(err);
+        return throwError(() => new Error('Failed to add new course.'));
+      })
+    );
+  }
+
+  updateCourse(course: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course).pipe(
+      catchError(err => {
+        console.error(err);
+        return throwError(() => new Error(`Failed to update course ID ${course.id}.`));
+      })
+    );
+  }
+
+  deleteCourse(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+      catchError(err => {
+        console.error(err);
+        return throwError(() => new Error(`Failed to delete course ID ${id}.`));
+      })
+    );
   }
 }
+
 

@@ -15,6 +15,7 @@ export class CourseList implements OnInit {
   isLoading = true;
   selectedCourseId: number | null = null;
   courses: Course[] = [];
+  errorMessage = '';
 
   constructor(
     private courseService: CourseService,
@@ -24,19 +25,26 @@ export class CourseList implements OnInit {
 
 
   ngOnInit(): void {
-    const rawCourses = this.courseService.getCourses();
-    const search = this.route.snapshot.queryParamMap.get('search');
-    if (search) {
-      this.courses = rawCourses.filter(c => 
-        c.name.toLowerCase().includes(search.toLowerCase()) || 
-        c.code.toLowerCase().includes(search.toLowerCase())
-      );
-    } else {
-      this.courses = rawCourses;
-    }
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1500);
+    this.courseService.getCourses().subscribe({
+      next: (courses) => {
+        const search = this.route.snapshot.queryParamMap.get('search');
+        if (search) {
+          this.courses = courses.filter(c => 
+            c.name.toLowerCase().includes(search.toLowerCase()) || 
+            c.code.toLowerCase().includes(search.toLowerCase())
+          );
+        } else {
+          this.courses = courses;
+        }
+      },
+      error: (err) => {
+        this.errorMessage = err.message || 'Failed to load courses.';
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 
 

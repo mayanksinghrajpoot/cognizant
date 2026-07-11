@@ -1,0 +1,13 @@
+{
+  "courses": [
+    { "id": 1, "name": "Introduction to Angular", "code": "CS101", "credits": 3, "gradeStatus": "passed", "enrolled": false },
+    { "id": 2, "name": "Advanced TypeScript", "code": "CS102", "credits": 4, "gradeStatus": "pending", "enrolled": false },
+    { "id": 3, "name": "Web Development Basics", "code": "CS103", "credits": 2, "gradeStatus": "passed", "enrolled": true },
+    { "id": 4, "name": "Enterprise Architecture", "code": "CS104", "credits": 4, "gradeStatus": "failed", "enrolled": false },
+    { "id": 5, "name": "Database Management Systems", "code": "CS105", "credits": 3, "gradeStatus": "pending", "enrolled": true }
+  ],
+  "students": [
+    { "id": 1, "name": "John Doe", "email": "john.doe@university.edu" }
+  ],
+  "enrollments": []
+}

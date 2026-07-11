@@ -22,7 +22,10 @@ export class CourseDetail implements OnInit {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
       const courseId = Number(idParam);
-      this.course = this.courseService.getCourseById(courseId);
+      this.courseService.getCourseById(courseId).subscribe({
+        next: course => this.course = course,
+        error: err => console.error(err)
+      });
     }
   }
 }

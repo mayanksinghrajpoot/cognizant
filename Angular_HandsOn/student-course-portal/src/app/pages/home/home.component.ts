@@ -23,9 +23,7 @@ export class Home implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  get coursesCount(): number {
-    return this.courseService.getCourses().length;
-  }
+  coursesCount = 0;
 
   get enrolledCount(): number {
     return this.enrollmentService.getEnrolledCourses().length;
@@ -51,6 +49,9 @@ export class Home implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('HomeComponent initialised — courses loaded');
+    this.courseService.getCourses().subscribe({
+      next: courses => this.coursesCount = courses.length
+    });
   }
 
   ngOnDestroy(): void {
