@@ -1,0 +1,111 @@
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.form-control {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-control--small {
+  flex: 1;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.btn-primary:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #9e9e9e;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: #fff;
+  padding: 6px 12px;
+}
+
+.btn-add {
+  background-color: #2196f3;
+  color: #fff;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.form-array-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.85em;
+  margin-top: 4px;
+}
+
+.pending-message {
+  color: #ff9800;
+  font-size: 0.85em;
+  margin-top: 4px;
+}
+
+.success-message {
+  padding: 12px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  max-width: 450px;
+  margin-bottom: 16px;
+}
+
+/* Angular Form state classes */
+input.ng-invalid.ng-touched, 
+select.ng-invalid.ng-touched {
+  border: 1.5px solid #f44336 !important;
+}
+
+input.ng-valid.ng-touched, 
+select.ng-valid.ng-touched {
+  border: 1.5px solid #4caf50 !important;
+}
