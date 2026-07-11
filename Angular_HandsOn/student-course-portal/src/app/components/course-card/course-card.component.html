@@ -1,7 +1,28 @@
-<div class="course-card-body">
-  <h3>{{ course.name }}</h3>
-  <p><strong>Code:</strong> {{ course.code }}</p>
-  <p><strong>Credits:</strong> {{ course.credits }}</p>
-  <p><strong>ID:</strong> {{ course.id }}</p>
-  <button (click)="enrollRequested.emit(course.id)">Enroll</button>
+<div class="course-card" [ngClass]="cardClasses" [ngStyle]="{ 'border-left': '6px solid ' + getBorderColor() }" [appHighlight]="'#e0f7fa'">
+  <div class="course-card-body">
+    <h3>{{ course.name }}</h3>
+    <p><strong>Code:</strong> {{ course.code }}</p>
+    <p><strong>Credits:</strong> {{ course.credits | creditLabel }}</p>
+    <p><strong>ID:</strong> {{ course.id }}</p>
+    
+    <div [ngSwitch]="course.gradeStatus" class="grade-status-wrapper">
+      <span *ngSwitchCase="'passed'" class="badge badge--passed">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge--failed">Failed</span>
+      <span *ngSwitchCase="'pending'" class="badge badge--pending">Pending</span>
+    </div>
+
+    <div class="course-card-actions">
+      <button (click)="enrollRequested.emit(course.id)">
+        {{ course.enrolled ? 'Unenroll' : 'Enroll' }}
+      </button>
+      <button (click)="toggleDetails()">
+        {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+      </button>
+    </div>
+
+    <div *ngIf="isExpanded" class="course-details-panel">
+      <p><em>Detailed Description:</em> Dynamic course details for {{ course.name }} ({{ course.code }}).</p>
+    </div>
+  </div>
 </div>
+
