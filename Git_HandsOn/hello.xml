@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message>
+  <info>Conflict resolved between master and GitWork branches</info>
+  <content>Hello from resolved master branch and GitWork branch!</content>
+</message>

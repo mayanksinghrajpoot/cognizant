@@ -1,0 +1,9 @@
+# Ignore all log files
+*.log
+
+# Ignore log folders
+log/
+
+# Ignore backup/conflict files
+*.bak
+*.orig

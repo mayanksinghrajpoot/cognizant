@@ -1,0 +1,2 @@
+Welcome to Git Hands-On Labs!
+This repository demonstrates Git initialization, branching, merging, ignoring files, and resolving conflicts.
