@@ -13,6 +13,7 @@ import { EnrollmentService } from '../../services/enrollment.service';
 export class CourseCard implements OnChanges {
   @Input() course!: { id: number; name: string; code: string; credits: number; gradeStatus?: string; enrolled?: boolean };
   @Output() enrollRequested = new EventEmitter<number>();
+  @Output() cardClicked = new EventEmitter<number>();
 
   isExpanded = false;
 

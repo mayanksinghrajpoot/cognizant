@@ -1,6 +1,6 @@
 <div class="course-card" [ngClass]="cardClasses" [ngStyle]="{ 'border-left': '6px solid ' + getBorderColor() }" [appHighlight]="'#e0f7fa'">
   <div class="course-card-body">
-    <h3>{{ course.name }}</h3>
+    <h3 (click)="cardClicked.emit(course.id); $event.stopPropagation()" style="cursor: pointer; color: #1976d2;">{{ course.name }}</h3>
     <p><strong>Code:</strong> {{ course.code }}</p>
     <p><strong>Credits:</strong> {{ course.credits | creditLabel }}</p>
     <p><strong>ID:</strong> {{ course.id }}</p>

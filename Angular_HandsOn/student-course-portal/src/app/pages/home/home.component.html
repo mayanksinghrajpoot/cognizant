@@ -13,6 +13,7 @@
 
 <div class="search-section">
   <label for="search">Search: </label>
-  <input id="search" [(ngModel)]="searchTerm">
+  <input id="search" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()">
+  <button (click)="onSearch()" class="btn btn-primary" style="margin-left: 8px;">Search</button>
   <p>Searching for: {{ searchTerm }}</p>
 </div>

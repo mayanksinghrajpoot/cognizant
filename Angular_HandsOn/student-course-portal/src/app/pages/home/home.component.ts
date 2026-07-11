@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CourseService } from '../../services/course.service';
 import { EnrollmentService } from '../../services/enrollment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class Home implements OnInit, OnDestroy {
 
   constructor(
     private courseService: CourseService,
-    private enrollmentService: EnrollmentService
+    private enrollmentService: EnrollmentService,
+    private router: Router
   ) {}
 
   get coursesCount(): number {
@@ -28,6 +30,13 @@ export class Home implements OnInit, OnDestroy {
   get enrolledCount(): number {
     return this.enrollmentService.getEnrolledCourses().length;
   }
+
+  onSearch(): void {
+    if (this.searchTerm.trim()) {
+      this.router.navigate(['/courses'], { queryParams: { search: this.searchTerm } });
+    }
+  }
+
 
 
 

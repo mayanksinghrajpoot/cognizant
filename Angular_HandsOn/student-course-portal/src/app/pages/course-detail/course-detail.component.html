@@ -1,0 +1,18 @@
+<div *ngIf="course; else notFound" class="course-detail-card">
+  <h2>{{ course.name }} Details</h2>
+  <hr>
+  <p><strong>Course Code:</strong> {{ course.code }}</p>
+  <p><strong>Credits:</strong> {{ course.credits }}</p>
+  <p><strong>Status:</strong> {{ course.gradeStatus | uppercase }}</p>
+  <p><strong>Enrolled Status:</strong> {{ course.enrolled ? 'Enrolled' : 'Not Enrolled' }}</p>
+  <br>
+  <a routerLink="/courses" class="btn btn-secondary">Back to Courses List</a>
+</div>
+
+<ng-template #notFound>
+  <div class="error-message">
+    <h3>Course Not Found</h3>
+    <p>The requested course ID could not be found in our directory.</p>
+    <a routerLink="/courses" class="btn btn-secondary">Back to Courses List</a>
+  </div>
+</ng-template>

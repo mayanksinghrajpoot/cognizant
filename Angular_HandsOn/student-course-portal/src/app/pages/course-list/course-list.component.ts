@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CourseCard } from '../../components/course-card/course-card.component';
 import { CourseService } from '../../services/course.service';
 import { Course } from '../../models/course.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
@@ -15,10 +16,24 @@ export class CourseList implements OnInit {
   selectedCourseId: number | null = null;
   courses: Course[] = [];
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
 
   ngOnInit(): void {
-    this.courses = this.courseService.getCourses();
+    const rawCourses = this.courseService.getCourses();
+    const search = this.route.snapshot.queryParamMap.get('search');
+    if (search) {
+      this.courses = rawCourses.filter(c => 
+        c.name.toLowerCase().includes(search.toLowerCase()) || 
+        c.code.toLowerCase().includes(search.toLowerCase())
+      );
+    } else {
+      this.courses = rawCourses;
+    }
     setTimeout(() => {
       this.isLoading = false;
     }, 1500);
@@ -28,6 +43,10 @@ export class CourseList implements OnInit {
   onEnroll(courseId: number): void {
     console.log('Course list received enrollment request for ID: ' + courseId);
     this.selectedCourseId = courseId;
+  }
+
+  onCardClick(courseId: number): void {
+    this.router.navigate(['/courses', courseId]);
   }
 
   // trackByCourseId:
