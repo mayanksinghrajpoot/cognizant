@@ -1,0 +1,11 @@
+angular.json: Configures workspace and project defaults, build targets, assets, stylesheets, budgets, and testing details for the Angular CLI.
+tsconfig.json: Root TypeScript compiler configuration specifying global compiler options and target environments for the workspace.
+tsconfig.app.json: Component/application-specific TypeScript configuration inheriting from the root tsconfig and specifying app compilation options.
+package.json: Defines project npm dependencies, script commands (e.g. build, start, test), and project metadata.
+src/main.ts: Application entry point that bootstraps the Angular application (e.g., loading app.config.ts and bootstrapApplication).
+src/app/app.config.ts: Configures global dependency injection providers and modules (like routing) for the standalone root component.
+src/app/app.component.ts: Root component class that binds application data and serves as the visual shell for all other components.
+src/index.html: The main HTML page served to users containing the root <app-root> tag where the Angular application is rendered.
+
+Budgets configuration (maximumWarning: 500kB, maximumError: 1MB):
+These settings configure build thresholds for the initial compiled bundle size. If the bundle exceeds 500kB, the Angular CLI outputs a compilation warning, and if it exceeds 1MB, the build fails with an error, preventing oversized applications from being deployed.
