@@ -1,0 +1,11 @@
+com/cognizant/designpatterns/decorator/DecoratorTest.class
+com/cognizant/designpatterns/observer/ObserverTest.class
+com/cognizant/designpatterns/command/CommandTest.class
+com/cognizant/designpatterns/dependencyinjection/DependencyInjectionTest.class
+com/cognizant/designpatterns/mvc/MVCTest.class
+com/cognizant/designpatterns/proxy/ProxyTest.class
+com/cognizant/designpatterns/strategy/StrategyTest.class
+com/cognizant/designpatterns/builder/BuilderTest.class
+com/cognizant/designpatterns/singleton/SingletonTest.class
+com/cognizant/designpatterns/factorymethod/FactoryMethodTest.class
+com/cognizant/designpatterns/adapter/AdapterTest.class

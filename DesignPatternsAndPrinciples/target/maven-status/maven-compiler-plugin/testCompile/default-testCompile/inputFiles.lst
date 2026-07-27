@@ -1,0 +1,11 @@
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/adapter/AdapterTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/builder/BuilderTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/command/CommandTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/decorator/DecoratorTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/dependencyinjection/DependencyInjectionTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/factorymethod/FactoryMethodTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/mvc/MVCTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/observer/ObserverTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/proxy/ProxyTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/singleton/SingletonTest.java
+/Users/msr/Documents/cognizant/cognizant Assignment/DesignPatternsAndPrinciples/src/test/java/com/cognizant/designpatterns/strategy/StrategyTest.java
